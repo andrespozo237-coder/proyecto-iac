@@ -1,5 +1,6 @@
 ---
-- name: Fase 1 - Direccionamiento IP Base
+# Playbook para configuración de IPs (Despliegue Automático CI/CD)
+- name: CONFIGURACION DE INTERFACES Y DIRECCIONES IP EN LA TOPOLOGIA
   hosts: routers
   gather_facts: no
 
