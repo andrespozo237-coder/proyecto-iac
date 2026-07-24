@@ -1,6 +1,8 @@
 @echo off
 setlocal EnableDelayedExpansion
 
+:menu
+cls
 echo ==============================================
 echo       HISTORIAL RECIENTE DE CAMBIOS
 echo ==============================================
@@ -9,17 +11,22 @@ git log --oneline -n 7
 
 echo.
 echo ==============================================
-echo Escribe el CODIGO (ej. be89442) del cambio que 
+echo Escribe el CODIGO (ej. a0a9194) del cambio que 
 echo quieres DESHACER y presiona Enter.
-echo (Para cancelar, solo cierra esta ventana)
+echo.
+echo Para SALIR, simplemente escribe: salir
 echo ==============================================
-set /p commit="Codigo a deshacer: "
+set /p commit="Codigo a deshacer (o 'salir'): "
+
+if /i "%commit%"=="salir" (
+    exit /b
+)
 
 if "%commit%"=="" (
     echo.
-    echo No ingresaste ningun codigo. Cancelando...
+    echo No ingresaste ningun codigo. Intenta de nuevo...
     pause
-    exit /b
+    goto menu
 )
 
 echo.
@@ -33,7 +40,7 @@ if %errorlevel% neq 0 (
     echo [!] Cancelando la operacion para no dañar tus archivos...
     git revert --abort
     pause
-    exit /b
+    goto menu
 )
 
 echo.
@@ -45,4 +52,6 @@ echo ==============================================
 echo   ¡Restauracion completada exitosamente!
 echo   GitHub aplicara el arreglo en breve.
 echo ==============================================
-pause
+echo Presiona cualquier tecla para hacer OTRO cambio...
+pause >nul
+goto menu
