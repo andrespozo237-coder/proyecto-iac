@@ -1,0 +1,36 @@
+name: Despliegue EVE-NG
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Inicializar Terraform
+        run: terraform init
+        working-directory: ./terraform
+
+      - name: Aplicar Terraform
+        run: terraform apply -auto-approve
+        working-directory: ./terraform
+
+      - name: Ejecutar Ansible - IPS
+        run: ansible-playbook ansible/playbook_1_ips.yml -i ansible/inventario.ini
+
+      - name: Ejecutar Ansible - OSPF
+        run: ansible-playbook ansible/playbook_2_ospf.yml -i ansible/inventario.ini
+
+      - name: Ejecutar Ansible - LDP
+        run: ansible-playbook ansible/playbook_3_ldp.yml -i ansible/inventario.ini
+
+      - name: Ejecutar Ansible - BGP
+        run: ansible-playbook ansible/playbook_4_bgp.yml -i ansible/inventario.ini
+
+      - name: Ejecutar Ansible - VRF
+        run: ansible-playbook ansible/playbook_5_vrf.yml -i ansible/inventario.ini
