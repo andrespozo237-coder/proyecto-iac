@@ -29,7 +29,9 @@ git revert %commit% --no-edit
 :: Verificar si el revert fue exitoso
 if %errorlevel% neq 0 (
     echo.
-    echo Ocurrio un error al intentar deshacer. Es posible que haya conflictos.
+    echo [!] Ocurrio un conflicto porque ese cambio antiguo choca con uno mas reciente.
+    echo [!] Cancelando la operacion para no dañar tus archivos...
+    git revert --abort
     pause
     exit /b
 )
