@@ -12,13 +12,13 @@ jobs:
       - name: Descargar el código
         uses: actions/checkout@v4
 
-      - name: Inicializar Terraform
-        run: terraform init
-        working-directory: ./terraform
+    #  - name: Inicializar Terraform
+     #   run: terraform init
+     #   working-directory: ./terraform
 
-      - name: Aplicar Terraform
-        run: terraform apply -auto-approve
-        working-directory: ./terraform
+    #  - name: Aplicar Terraform
+     #   run: terraform apply -auto-approve
+      #  working-directory: ./terraform
 
       - name: Ejecutar Ansible - IPS
         run: ansible-playbook ansible/playbook_1_ips.yml -i ansible/inventario.ini
