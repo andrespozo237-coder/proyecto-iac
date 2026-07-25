@@ -7,7 +7,7 @@
   vars:
     configuraciones:
       PE_1:
-        loopback: "15.15.15.4"
+        loopback: "15.15.15.80"
         interfaces:
           - name: Ethernet0/1
             desc: "Hacia P_2 (Clase A)"
