@@ -9,7 +9,7 @@ terraform {
 
 # Recuerda verificar si la IP de tu EVE-NG sigue siendo la misma
 provider "eveng" {
-  host     = "http://100.74.210.95"
+  host     = "http://192.168.47.130"
   username = "admin"
   password = "eve"
 }
